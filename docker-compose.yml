@@ -1,0 +1,26 @@
+version: "2"
+services:
+  angular:
+    image: michaelthebrute/meandocker_angular
+    build: angular-client
+    ports:
+      - "4200:4200"
+    networks:
+      - webnet
+  express:
+    image: michaelthebrute/meandocker_express
+    build: express-server
+    ports:
+      - "3000:3000"
+    networks:
+      - webnet
+    links:
+      - database
+  database:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - webnet
+networks:
+  webnet:
